@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Controle Financeiro</title>
+    <link rel="stylesheet" href="dashboard.style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">Controle<span class="logo-highlight">Financeiro</span></h1>
+        <nav>
+            <span id="user-email"></span>
+            <button id="logout-button" class="btn btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Filtro de Mês/Ano -->
+        <section class="card filter-card">
+            <h2 class="card-title"><i class="fa-solid fa-calendar-days"></i> Relatório Mensal</h2>
+            <div class="month-filter">
+                <label for="month-select">Mês:</label>
+                <select id="month-select"></select>
+                <label for="year-select">Ano:</label>
+                <select id="year-select"></select>
+            </div>
+        </section>
+
+        <div class="columns">
+            <!-- Coluna de Receitas -->
+            <section class="card column-card">
+                <h2 class="card-title"><i class="fa-solid fa-coins icon-income"></i> Receitas</h2>
+                <button class="btn btn-add btn-income"><i class="fa-solid fa-plus"></i> Adicionar Receita</button>
+                <!-- Formulário de Receita (inicialmente oculto) -->
+                <div id="income-form-container" class="form-container hidden">
+                    <form id="income-form">
+                        <h3>Nova Receita</h3>
+                        <div class="input-group">
+                            <label for="income-description">Descrição</label>
+                            <input type="text" id="income-description" placeholder="Ex: Salário" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="income-amount">Valor</label>
+                            <input type="number" id="income-amount" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="income-date">Data</label>
+                            <input type="date" id="income-date" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-save">Salvar</button>
+                            <button type="button" class="btn btn-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tabela de Receitas -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="income-table-body">
+                            <!-- Linhas de receita serão inseridas aqui via JS -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="total-label">Total</td>
+                                <td></td>
+                                <td id="income-total">R$ 0,00</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Coluna de Despesas -->
+            <section class="card column-card">
+                <h2 class="card-title"><i class="fa-solid fa-wallet icon-expense"></i> Despesas</h2>
+                <button class="btn btn-add btn-expense"><i class="fa-solid fa-plus"></i> Adicionar Despesa</button>
+                <!-- Formulário de Despesa (inicialmente oculto) -->
+                <div id="expense-form-container" class="form-container hidden">
+                    <form id="expense-form">
+                        <h3>Nova Despesa</h3>
+                        <div class="input-group">
+                            <label for="expense-description">Descrição</label>
+                            <input type="text" id="expense-description" placeholder="Ex: Aluguel" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-amount">Valor</label>
+                            <input type="number" id="expense-amount" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-date">Data</label>
+                            <input type="date" id="expense-date" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-save">Salvar</button>
+                            <button type="button" class="btn btn-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tabela de Despesas -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expense-table-body">
+                            <!-- Linhas de despesa serão inseridas aqui via JS -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="total-label">Total</td>
+                                <td></td>
+                                <td id="expense-total">R$ 0,00</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Firebase e Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.script.js"></script>
+</body>
+</html>

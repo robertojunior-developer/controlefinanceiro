@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro Moderno</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card-container">
+            <!-- Card de Login -->
+            <div class="card" id="login-card">
+                <h1 class="card-title">Login</h1>
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="email" id="login-email" required>
+                        <label for="login-email">Email</label>
+                    </div>
+                    <div class="input-group password-wrapper">
+                        <input type="password" id="login-password" required>
+                        <label for="login-password">Senha</label>
+                        <i class="fa-solid fa-eye-slash" id="toggle-password"></i>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                </form>
+                <div class="card-links">
+                    <a href="#" id="forgot-password-link">Esqueci a senha?</a>
+                    <a href="#" id="create-account-link">Criar conta</a>
+                </div>
+            </div>
+
+            <!-- Card de Cadastro -->
+            <div class="card hidden" id="register-card">
+                <h1 class="card-title">Cadastro</h1>
+                <form id="register-form">
+                    <div class="input-group">
+                        <input type="text" id="register-name" required>
+                        <label for="register-name">Nome</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="register-email" required>
+                        <label for="register-email">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="register-password" required>
+                        <label for="register-password">Senha</label>
+                    </div>
+                    <button type="submit" class="btn">Cadastrar</button>
+                </form>
+                <div class="card-links">
+                    <a href="#" id="login-link">Já tenho uma conta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
