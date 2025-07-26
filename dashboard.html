@@ -6,6 +6,7 @@
     <title>Dashboard - Controle Financeiro</title>
     <link rel="stylesheet" href="dashboard.style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -17,16 +18,32 @@
     </header>
 
     <main class="container">
-        <!-- Filtro de Mês/Ano -->
-        <section class="card filter-card">
-            <h2 class="card-title"><i class="fa-solid fa-calendar-days"></i> Relatório Mensal</h2>
-            <div class="month-filter">
-                <label for="month-select">Mês:</label>
-                <select id="month-select"></select>
-                <label for="year-select">Ano:</label>
-                <select id="year-select"></select>
-            </div>
-        </section>
+        <div class="summary-row">
+            <!-- Card Saldo Atual -->
+            <section class="card">
+                <h2 class="card-title"><i class="fa-solid fa-scale-balanced"></i> Saldo Atual</h2>
+                <div class="balance-container">
+                    <p id="current-balance" class="balance-value">R$ 0,00</p>
+                </div>
+            </section>
+
+            <!-- Filtro de Mês/Ano -->
+            <section class="card filter-card">
+                <h2 class="card-title"><i class="fa-solid fa-calendar-days"></i> Relatório Mensal</h2>
+                <div class="filter-controls">
+                    <div class="month-filter">
+                        <label for="month-select">Mês:</label>
+                        <select id="month-select"></select>
+                        <label for="year-select">Ano:</label>
+                        <select id="year-select"></select>
+                    </div>
+                    <div class="report-actions">
+                        <button id="export-pdf-btn" class="btn btn-action-report"><i class="fa-solid fa-file-pdf"></i> Exportar PDF</button>
+                        <button id="print-report-btn" class="btn btn-action-report"><i class="fa-solid fa-print"></i> Imprimir</button>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <div class="columns">
             <!-- Coluna de Receitas -->
@@ -39,15 +56,15 @@
                         <h3>Nova Receita</h3>
                         <div class="input-group">
                             <label for="income-description">Descrição</label>
-                            <input type="text" id="income-description" placeholder="Ex: Salário" required>
+                            <input type="text" id="income-description" name="description" placeholder="Ex: Salário" required>
                         </div>
                         <div class="input-group">
                             <label for="income-amount">Valor</label>
-                            <input type="number" id="income-amount" placeholder="0.00" step="0.01" required>
+                            <input type="number" id="income-amount" name="amount" placeholder="0.00" step="0.01" required>
                         </div>
                         <div class="input-group">
                             <label for="income-date">Data</label>
-                            <input type="date" id="income-date" required>
+                            <input type="date" id="income-date" name="date" required>
                         </div>
                         <div class="form-buttons">
                             <button type="submit" class="btn btn-save">Salvar</button>
@@ -91,15 +108,15 @@
                         <h3>Nova Despesa</h3>
                         <div class="input-group">
                             <label for="expense-description">Descrição</label>
-                            <input type="text" id="expense-description" placeholder="Ex: Aluguel" required>
+                            <input type="text" id="expense-description" name="description" placeholder="Ex: Aluguel" required>
                         </div>
                         <div class="input-group">
                             <label for="expense-amount">Valor</label>
-                            <input type="number" id="expense-amount" placeholder="0.00" step="0.01" required>
+                            <input type="number" id="expense-amount" name="amount" placeholder="0.00" step="0.01" required>
                         </div>
                         <div class="input-group">
                             <label for="expense-date">Data</label>
-                            <input type="date" id="expense-date" required>
+                            <input type="date" id="expense-date" name="date" required>
                         </div>
                         <div class="form-buttons">
                             <button type="submit" class="btn btn-save">Salvar</button>
@@ -132,15 +149,25 @@
                     </table>
                 </div>
             </section>
-        </div>
+        </div> <!-- Fim da div.columns -->
+
+        <!-- Card do Gráfico -->
+        <section class="card chart-card">
+            <h2 class="card-title"><i class="fa-solid fa-chart-pie"></i> Balanço do Mês</h2>
+            <div class="chart-container">
+                <canvas id="balance-chart"></canvas>
+            </div>
+        </section>
     </main>
 
-    <!-- Firebase e Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
+    <!-- Bibliotecas para PDF e Gráficos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="dashboard.script.js"></script>
 </body>
 </html>

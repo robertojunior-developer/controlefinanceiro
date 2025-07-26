@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 console.log('Usuário logado:', userCredential.user);
-                alert('Login realizado com sucesso!');
                 // Redirecionar para a página principal do app
                 window.location.href = 'dashboard.html';
             })

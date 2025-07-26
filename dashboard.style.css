@@ -88,7 +88,23 @@ header nav {
 }
 
 .month-filter select {
-    padding: 8px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.chart-card {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
     border-radius: 6px;
     border: 1px solid #ccc;
     background-color: #fff;
@@ -231,7 +247,7 @@ tfoot td {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
 }
 
@@ -257,6 +273,74 @@ tfoot td {
     display: none;
 }
 
+.summary-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.summary-row .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.balance-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.balance-value {
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+#current-balance.positive {
+    color: #2ecc71;
+}
+
+#current-balance.negative {
+    color: #e74c3c;
+}
+
+.filter-card {
+    margin-bottom: 0; /* Remove a margem que existia antes */
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.month-filter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.report-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action-report {
+    background: linear-gradient(45deg, #5D6D7E, #34495E);
+    color: #fff;
+    font-size: 0.9em;
+    padding: 8px 15px;
+}
+
+.btn-action-report i {
+    margin-right: 5px;
+}
+
 /* Responsividade */
 @media (max-width: 992px) {
     .columns {
@@ -269,5 +353,47 @@ tfoot td {
         flex-direction: column;
         gap: 15px;
         padding: 20px;
+    }
+
+    .filter-controls {
+        justify-content: center;
+    }
+}
+
+/* Estilos de Impressão */
+@media print {
+    body {
+        background-color: #fff;
+        font-size: 12px;
+    }
+
+    header,
+    .btn,
+    .form-container,
+    .report-actions,
+    .action-buttons,
+    .chart-card {
+        display: none !important;
+    }
+
+    main.container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .summary-row, .columns {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-container {
+        border: none;
     }
 }
